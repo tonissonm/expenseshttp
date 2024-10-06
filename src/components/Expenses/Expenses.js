@@ -1,7 +1,7 @@
 import ExpenseItem from './ExpenseItem';
-import Card from './Card';
+import Card from '../UI/Card';
 import './Expenses.css';
-function Expenses(props){
+const Expenses=(props)=>{
     const expenses = [
         {
           date: new Date(2023, 9, 6),

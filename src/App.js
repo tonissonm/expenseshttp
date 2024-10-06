@@ -1,6 +1,6 @@
 
 import './App.css';
-import Expenses from './components/Expenses';
+import Expenses from './components/Expenses/Expenses';
 const expense = [{
   id: 1,
   date: new Date(2023,9,6),
