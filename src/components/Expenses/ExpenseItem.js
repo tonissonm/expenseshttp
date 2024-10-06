@@ -1,12 +1,15 @@
 import ExpenseDate from './ExpenseDate';
 import Card from '../UI/Card';
 import './ExpenseItem.css';
-
+import {useState} from 'react';
 const ExpenseItem =(props) =>{
 
-const day = props.expenseData.date.toLocaleString('en-US', { day: '2-digit' })
-const month = props.expenseData.date.toLocaleString('en-US', { month: 'long' })
-const year = props.expenseData.date.getFullYear()
+    const [title, setTitle]=useState(props.expenseData.title);
+    const clickHandler = ()=> {
+        console.log('Clicked!');
+        setTitle(`Updated by Click ${title}`);
+        console.log(title);        
+    }
     return (
         <Card className='expense-item'>
             <ExpenseDate
@@ -19,6 +22,7 @@ const year = props.expenseData.date.getFullYear()
             {props.expenseData.price}
                 </div>
             </div>
+        <button onClick ={clickHandler}>Click Me</button>
         </Card>
     );
 }
