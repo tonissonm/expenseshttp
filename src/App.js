@@ -17,9 +17,9 @@ id: 'id1',
 },
 {
   id: 'id3',
-  date: new Date(2024,10,15),
+  date: new Date(2025,1,5),
   title: 'Uus Jalg',
-  price: 50.00
+  price: 50.01
 }]
 
 const App = () => {
