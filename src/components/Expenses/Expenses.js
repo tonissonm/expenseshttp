@@ -17,7 +17,7 @@ const Expenses=(props)=>{
     if(filteredYear === ''){
       return true
     }
-    return expense.date.getFullYear().toString() === filteredYear
+    return new Date(expense.date).getFullYear().toString() === filteredYear
   })
 
   let expensesContent = <p>No expenses found.</p>
