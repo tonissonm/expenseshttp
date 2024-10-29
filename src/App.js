@@ -23,13 +23,34 @@ id: 'id1',
 }]
 
 const App = () => {
-  const [expenses,setExpenses] = useState(()=>{
-    const expensesFromLS = JSON.parse(localStorage.getItem('expenses'));
-    return expensesFromLS || []
-  })
-  useEffect(()=>{
-    localStorage.setItem('expenses',JSON.stringify(expenses));
-  },[expenses])
+  const [isFetching, setIsFetching] = useState(false)
+  const [expenses,setExpenses] = useState([])
+  const [error,setError] = useState(null)
+  const [showError,setShowError] = useState(null)
+  useEffect(()=> {
+    const getExpenses = async() => {
+      setIsFetching(true)
+      try{
+        const response =await fetch('http://localhost:3002/expenses');
+        const responseData = await response.json()
+        if(!response.ok){
+          throw new Error('Failed fetching data')
+        }
+        setExpenses(responseData.expenses)
+        
+      }
+      catch(error){
+        setError({
+          title: 'An error occured!',
+          message: 'Failed fetchign expenses data, please try again later'
+        })
+      }
+      setIsFetching(false)
+    }
+    getExpenses()
+    console.log(expenses)
+  },[])
+  
   const addExpenseHandler = (expense) =>{
     console.log(expense)
     setExpenses((previousExpenses)=>{
@@ -38,7 +59,7 @@ const App = () => {
   return (
     <div className="App">
       <NewExpense onAddExpense={addExpenseHandler}></NewExpense>
-      <Expenses expenses={expenses}/>
+      <Expenses expenses={expenses} isLoading ={isFetching}/>
     </div>
   )
 }

@@ -33,7 +33,7 @@ const Expenses=(props)=>{
       <Card className='expenses'>
           <ExpensesFilter selected = {filteredYear} onChangeFilter ={filteredYearHandler}
           />
-          <ExpensesList expenses ={filteredExpenses}/>
+          <ExpensesList expenses ={filteredExpenses} isLoading={props.isLoading}/>
         
       </Card>
     )
